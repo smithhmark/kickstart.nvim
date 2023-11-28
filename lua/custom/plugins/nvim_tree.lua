@@ -22,6 +22,13 @@ return {
 	},
 	config = function()
 		require("nvim-tree").setup {
+			sort = {
+				sorter = "case-sensitive",
+				folders_first = true,
+				files_first = false,
+			},
+			filters = { dotfiles = true, },
+
 			on_attach = my_on_attach,
 		}
 	end,
