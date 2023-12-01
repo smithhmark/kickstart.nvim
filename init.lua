@@ -292,8 +292,9 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
-local nvmim_tree_api = require "nvim-tree.api"
-vim.keymap.set('n', '<C-n>', nvmim_tree_api.tree.open)
+-- Nvim-tree mappings
+local nvim_tree_api = require "nvim-tree.api"
+vim.keymap.set('n', '<C-n>', nvim_tree_api.tree.toggle)
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
