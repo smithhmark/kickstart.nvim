@@ -23,7 +23,7 @@ return {
 	config = function()
 		require("nvim-tree").setup {
 			sort = {
-				sorter = "case-sensitive",
+				sorter = "case_sensitive",
 				folders_first = true,
 				files_first = false,
 			},
