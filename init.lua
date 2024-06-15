@@ -571,7 +571,13 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
-        -- rust_analyzer = {},
+        rust_analyzer = { -- based on https://www.youtube.com/watch?v=Mccy6wuq3JE (@~10min)
+          capabilities = capabilities,
+          on_attach = on_attach,
+          cmd = {
+            "rustup", "run", "stable", "rust-analyzer",
+          },
+        },
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
