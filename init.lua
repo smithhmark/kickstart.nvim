@@ -155,7 +155,7 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 -- setting a visual marker at 80-columns
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = '80'
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -415,7 +415,15 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+      {
+        'williamboman/mason.nvim',
+        config = true,
+        opts = {
+          ensure_installed = {
+            'gopls',
+          },
+        },
+      }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -569,19 +577,36 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        gopls = {
+          settings = {
+            gopls = {
+              completeUnimported = true,
+              usePlaceholders = true,
+              analyses = {
+                unusedparams = true,
+              },
+            },
+          },
+          -- on_attach = on_attach,
+          cmd = { 'gopls' },
+          filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+          root_dir = require('lspconfig.util').root_pattern('go.work', 'go.mod', '.git'),
+        },
         -- pyright = {},
         rust_analyzer = { -- based on https://www.youtube.com/watch?v=Mccy6wuq3JE (@~10min)
           capabilities = capabilities,
-          on_attach = on_attach,
+          --on_attach = on_attach,
           cmd = {
-            "rustup", "run", "stable", "rust-analyzer",
+            'rustup',
+            'run',
+            'stable',
+            'rust-analyzer',
           },
           settings = {
-            ["rust-analyzer"] = {
-                checkOnSave = {
-                    command = "clippy",
-                },
+            ['rust-analyzer'] = {
+              checkOnSave = {
+                command = 'clippy',
+              },
             },
           },
         },
@@ -668,6 +693,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        go = { 'goimports', 'gofmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -801,6 +827,7 @@ require('lazy').setup({
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'tokyonight-storm'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
