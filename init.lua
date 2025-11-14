@@ -167,7 +167,7 @@ vim.opt.colorcolumn = '80'
 vim.o.confirm = true
 
 -- setting a visual marker at 80-columns
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = '80'
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
